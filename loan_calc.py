@@ -73,16 +73,22 @@ choices = [args.type, args.payment, args.principal, args.periods, args.interest]
 choices_filter = list(filter(None, choices))
 choices_numbers = choices_filter[1:]
 
-if len(choices_filter) < 4 or any(float(i) < 0 for i in choices_numbers):
-    print('Incorrect parameters')
-elif args.type == 'annuity':
-    if args.interest and args.periods and args.principal:
-        annuity_payment(float(args.interest), int(args.periods), int(args.principal))
-    elif args.payment and args.interest and args.periods:
-        principal_loan(int(args.payment), float(args.interest), int(args.periods))
-    elif args.payment and args.interest and args.principal:
-        number_of_payments(int(args.payment), float(args.interest), int(args.principal))
-elif args.type == 'diff' and not args.payment:
-    differentiate_payment(float(args.interest), int(args.periods), int(args.principal))
-else:
-    print('Incorrect parameters')
+
+def main():
+    if len(choices_filter) < 4 or any(float(i) < 0 for i in choices_numbers):
+        print('Incorrect parameters')
+    elif args.type == 'annuity':
+        if args.interest and args.periods and args.principal:
+            annuity_payment(float(args.interest), int(args.periods), int(args.principal))
+        elif args.payment and args.interest and args.periods:
+            principal_loan(int(args.payment), float(args.interest), int(args.periods))
+        elif args.payment and args.interest and args.principal:
+            number_of_payments(int(args.payment), float(args.interest), int(args.principal))
+    elif args.type == 'diff' and not args.payment:
+        differentiate_payment(float(args.interest), int(args.periods), int(args.principal))
+    else:
+        print('Incorrect parameters')
+
+
+if __name__ == '__main__':
+    main()
