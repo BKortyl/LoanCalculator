@@ -3,7 +3,7 @@ import math
 
 parser = argparse.ArgumentParser(description="This program lets you calculate a couple loan related things.")
 
-parser.add_argument("--type", choices=["annuity", "diff"], help="Choose between annuity and differentiated payment.")
+parser.add_argument("--type", choices=["annuity", "diff"], required=True, help="Choose between annuity and differentiated payment.")
 parser.add_argument("--payment", help="Specify a payment amount per period for annuity payment.")
 parser.add_argument("--principal", help="Specify a principal amount of the loan.")
 parser.add_argument("--periods", help="Specify the number of months you loan the money for.")
