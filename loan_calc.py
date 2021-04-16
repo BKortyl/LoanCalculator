@@ -1,16 +1,6 @@
 import argparse
 import math
 
-parser = argparse.ArgumentParser(description="This program lets you calculate a couple loan related things.")
-
-parser.add_argument("--type", choices=["annuity", "diff"], required=True, help="Choose between annuity and differentiated payment.")
-parser.add_argument("--payment", help="Specify a payment amount per period for annuity payment.")
-parser.add_argument("--principal", help="Specify a principal amount of the loan.")
-parser.add_argument("--periods", help="Specify the number of months you loan the money for.")
-parser.add_argument("--interest", help="Specify the interest percentage.")
-
-args = parser.parse_args()
-
 
 def nominal_interest(interest):
     return interest / (12 * 100)
@@ -69,11 +59,6 @@ def principal_loan(annuity, interest, months):
     print(f'Overpayment = {overpay(result, total_payment)}')
 
 
-choices = [args.type, args.payment, args.principal, args.periods, args.interest]
-choices_filter = list(filter(None, choices))
-choices_numbers = choices_filter[1:]
-
-
 def main():
     if len(choices_filter) < 4 or any(float(i) < 0 for i in choices_numbers):
         print('Incorrect parameters')
@@ -91,4 +76,15 @@ def main():
 
 
 if __name__ == '__main__':
+    parser = argparse.ArgumentParser(description="This program lets you calculate a couple loan related things.")
+    parser.add_argument("--type", choices=["annuity", "diff"], required=True,
+                        help="Choose between annuity and differentiated payment.")
+    parser.add_argument("--payment", help="Specify a payment amount per period for annuity payment.")
+    parser.add_argument("--principal", help="Specify a principal amount of the loan.")
+    parser.add_argument("--periods", help="Specify the number of months you loan the money for.")
+    parser.add_argument("--interest", help="Specify the interest percentage.")
+    args = parser.parse_args()
+    choices = [args.type, args.payment, args.principal, args.periods, args.interest]
+    choices_filter = list(filter(None, choices))
+    choices_numbers = choices_filter[1:]
     main()
